@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ProjectTask.Models.Department.DepartmentVM>
+
+@{
+    ViewData["Title"] = "Departments with Sub-Departments";
+}
+
+<h2>Departments with Sub-Departments</h2>
+
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Department Name</th>
+            <th>Department Logo</th>
+            <th>Sub-Departments</th>
+            <th>Sub-Department Logo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.DepartmentName</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(department.DepartmentLogo))
+                    {
+                        <img src="@department.DepartmentLogo" alt="Department Logo" style="width: 100px; height: auto;" />
+                    }
+                </td>
+                <td>
+                    @if (department.SubDepartments.Any())
+                    {
+                        <ul class="list-unstyled">
+                            @foreach (var subDepartment in department.SubDepartments)
+                            {
+                                <li>@subDepartment.SubDepartmentName</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>No sub-departments</span>
+                    }
+                </td>
+                <td>
+                    @if (department.SubDepartments.Any())
+                    {
+                        <ul class="list-unstyled">
+                            @foreach (var subDepartment in department.SubDepartments)
+                            {
+                                @if (!string.IsNullOrEmpty(subDepartment.SubDepartmentLogo))
+                                {
+                                    <li>
+                                        <img src="@subDepartment.SubDepartmentLogo" alt="Sub-Department Logo" style="width: 50px; height: auto;" />
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>No logos</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Styles {
+    <style>
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+            .table th,
+            .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+        .thead-dark th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        .img-thumbnail {
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            max-width: 100px; /* Adjust max-width for department logo */
+            height: auto;
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+
+        .d-flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+}

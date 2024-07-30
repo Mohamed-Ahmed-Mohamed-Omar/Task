@@ -1,0 +1,45 @@
+﻿@model ProjectTask.Models.SubDepartment.CreateSubDepartment
+
+@{
+    ViewData["Title"] = "Create Sub-Department";
+}
+
+<h2>Create Sub-Department</h2>
+<br />
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="SubDepartment_Name" class="control-label"></label>
+        <input asp-for="SubDepartment_Name" class="form-control" />
+        <span asp-validation-for="SubDepartment_Name" class="text-danger"></span>
+    </div>
+    <br/>
+    <div class="form-group">
+        <label asp-for="DepartmentId" class="control-label"></label>
+        <select asp-for="DepartmentId" class="form-control" asp-items="@(SelectList)ViewBag.DepartmentList">
+            <option>Choose Department</option>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="SubDepartment_Logo_Url" class="control-label"></label>
+        <input asp-for="SubDepartment_Logo_Url" type="file" class="form-control" />
+    </div>
+    <br />
+    <center>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </center>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

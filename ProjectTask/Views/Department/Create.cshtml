@@ -1,0 +1,40 @@
+﻿@model ProjectTask.Models.Department.CreateDepartment
+
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+<h2>Create Department</h2>
+<br />
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Department_Name" class="control-label"></label>
+        <input asp-for="Department_Name" class="form-control" />
+        <span asp-validation-for="Department_Name" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Department_Logo_Url"></label>
+        <input asp-for="Department_Logo_Url" type="file" class="form-control" />
+    </div>
+    <br />
+    <center>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-controller="Department" asp-action="Index" class="btn btn-info">Back To List</a>
+        </div>
+    </center>
+</form>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

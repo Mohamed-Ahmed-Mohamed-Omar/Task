@@ -1,0 +1,60 @@
+﻿@model ProjectTask.Models.Mail.SendMailVM
+
+@{
+    ViewData["Title"] = "Send Mail";
+}
+
+<h2>Send Mail</h2>
+
+<br />
+
+<form asp-action="SendMail" method="post">
+    <div class="form-group">
+        <label asp-for="mailTo" class="control-label">To:</label>
+        <input asp-for="mailTo" class="form-control" type="email" required />
+        <span asp-validation-for="mailTo" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="message" class="control-label">Message:</label>
+        <textarea asp-for="message" class="form-control" required></textarea>
+        <span asp-validation-for="message" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label accesskey="Time" class="control-label">Time:</label>
+        <input asp-for="Time" class="form-control" type="datetime-local" name="time" />
+    </div>
+    <br />
+    <center>
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-primary" />
+        </div>
+    </center>
+</form>
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#date').datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
+
+            $('#time').timepicker({
+                timeFormat: 'hh:mm TT'
+            });
+        });
+    </script>
+}
